@@ -27,7 +27,6 @@ function Employee(name, department, level, imageURL, salary) {
   this.imageURL = imageURL;
   this.salary = salary;
   employeesData.push(this);
-  console.log(idArr, employeesData);
 }
 
 Employee.prototype.employeeSalary = function () {
@@ -50,6 +49,7 @@ Employee.prototype.render = function () {
   let imgDiv = document.createElement("div");
   let dataDiv = document.createElement("div");
   dataDiv.classList.add("data-div");
+  imgDiv.classList.add("img-Div");
   cardDiv.appendChild(imgDiv);
   cardDiv.appendChild(dataDiv);
   let empImg = document.createElement("img"); //create image
@@ -58,19 +58,19 @@ Employee.prototype.render = function () {
   imgDiv.appendChild(empImg);
   //---------------------------
   let empName = document.createElement("p"); // create name
-  empName.textContent = this.fullName;
+  empName.textContent = `Name :${this.fullName}`;
   dataDiv.appendChild(empName);
   //--------------------------
   let empDepartment = document.createElement("p"); // create department
-  empDepartment.textContent = this.department;
+  empDepartment.textContent = `Department :${this.department}`;
   dataDiv.appendChild(empDepartment);
   //--------------------------
   let empLevel = document.createElement("p"); // create level
-  empLevel.textContent = this.level;
+  empLevel.textContent = `Level :${this.level}`;
   dataDiv.appendChild(empLevel);
   //--------------------------
   let empID = document.createElement("p"); // create level
-  empID.textContent = this.employeeID;
+  empID.textContent = `ID :${this.employeeID}`;
   dataDiv.appendChild(empID);
 };
 const doImportantStuff = function () {

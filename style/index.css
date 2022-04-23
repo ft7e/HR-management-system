@@ -56,5 +56,10 @@ html {
   height: 100%;
 }
 .data-div {
-  font-size: 0.8rem;
+  font-size: 0.6rem;
+  width: 50%;
+  height: 100%;
+}
+.img-Div {
+  width: 50%;
 }
