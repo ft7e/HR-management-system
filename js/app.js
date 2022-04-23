@@ -2,9 +2,20 @@
 const employeesData = [];
 let cardsSection = document.querySelector("#cards-section");
 let mainForm = document.querySelector("#main-form");
+const idArr = [];
+const generateID = function () {
+  let uniqueID = Math.floor(Math.random() * 10000);
+  for (let i = 0; i < idArr.length; i++) {
+    if (uniqueID === idArr[i]) generateID();
+    else {
+      idArr.push(uniqueID);
+      return uniqueID;
+    }
+  }
+};
 
-function Employee(id, name, department, level, imageURL, salary) {
-  this.employeeID = id;
+function Employee(name, department, level, imageURL, salary) {
+  this.employeeID = generateID();
   this.fullName = name;
   this.department = department;
   this.level = level;
@@ -46,30 +57,24 @@ Employee.prototype.render = function () {
   empLevel.textContent = this.level;
   cardDiv.appendChild(empLevel);
   //--------------------------
+  let empID = document.createElement("p"); // create level
+  empID.textContent = this.employeeID;
+  cardDiv.appendChild(empID);
 };
 const doImportantStuff = function () {
-  for (let i = 0; i < employeesData.length; i++) {
-    employeesData[i].employeeSalary();
-  }
-  for (let i = 0; i < employeesData.length; i++) {
-    employeesData[i].render();
-  }
+  employeesData[employeesData.length - 1].employeeSalary();
+
+  employeesData[employeesData.length - 1].render();
 };
 function addCard(event) {
   event.preventDefault();
   let formFullName = document.querySelector("#fname").value;
   let formImgUrl = document.querySelector("#img-url").value;
+  !formImgUrl ? (formImgUrl = "images/squidWard.jpg") : "";
   let formDepSelector = document.querySelector("#department").value;
   let formLevelSelector = document.querySelector("#level").value;
 
-  new Employee(
-    1,
-    formFullName,
-    formDepSelector,
-    formLevelSelector,
-    (formImgUrl = "images/squirdWard.jpg"),
-    0
-  );
+  new Employee(formFullName, formDepSelector, formLevelSelector, formImgUrl, 0);
   doImportantStuff();
 }
 
