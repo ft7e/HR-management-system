@@ -1,5 +1,7 @@
 "use strict";
 const employeesData = [];
+let cardsSection = document.querySelector("#cards-section");
+let mainForm = document.querySelector("#main-form");
 
 function Employee(id, name, department, level, imageURL, salary) {
   this.employeeID = id;
@@ -22,15 +24,24 @@ Employee.prototype.employeeSalary = function () {
   }
   this.salary = basicSalary - basicSalary * 0.075;
 };
-
 Employee.prototype.render = function () {
-  document.write(
-    `<p>Employee name is: ${this.fullName} and his/her salary is: JOD ${this.salary}</p>`
-  );
-  console.log(
-    `<p>Employee name is: ${this.fullName} and his/her salary is: JOD ${this.salary}</p>`
-  );
+  let cardDiv = document.createElement("div");
+  cardsSection.appendChild(cardDiv);
+  cardDiv.classList.add("card-div");
+  //----------------------
+  let name = document.createElement("h3");
+  name.textContent = this.fullName;
+  cardDiv.appendChild(name);
 };
+function addCard(event) {
+  event.preventDefault();
+  let formFullName = document.querySelector("#fname").value;
+  let formImgUrl = document.querySelector("#img-url").value;
+  let formDepSelector = document.querySelector("#department").value;
+  console.log(formDepSelector);
+}
+
+mainForm.addEventListener("submit", addCard);
 
 let employee1000 = new Employee(
   1000,
@@ -89,20 +100,11 @@ let employee1006 = new Employee(
   0
 );
 
-employee1000.employeeSalary();
-employee1001.employeeSalary();
-employee1002.employeeSalary();
-employee1003.employeeSalary();
-employee1004.employeeSalary();
-employee1005.employeeSalary();
-employee1006.employeeSalary();
+for (let i = 0; i < employeesData.length; i++) {
+  employeesData[i].employeeSalary();
+}
+for (let i = 0; i < employeesData.length; i++) {
+  employeesData[i].render();
+}
 
-employee1000.render();
-employee1001.render();
-employee1002.render();
-employee1003.render();
-employee1004.render();
-employee1005.render();
-employee1006.render();
-
-console.log(employeesData);
+// DOM section
