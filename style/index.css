@@ -40,5 +40,21 @@ html {
   margin-top: 1%;
 }
 .card-div {
-  background-color: wheat;
+  color: #dddddd;
+  background-color: #06113c;
+  width: 33%;
+  height: 100%;
+  display: flex;
+  margin-bottom: 0.5rem;
+}
+#cards-section {
+  display: flex;
+  flex-wrap: wrap;
+}
+.card-img {
+  width: 70%;
+  height: 100%;
+}
+.data-div {
+  font-size: 0.8rem;
 }

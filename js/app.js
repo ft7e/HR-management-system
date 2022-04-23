@@ -5,12 +5,17 @@ let mainForm = document.querySelector("#main-form");
 const idArr = [];
 const generateID = function () {
   let uniqueID = Math.floor(Math.random() * 10000);
-  for (let i = 0; i < idArr.length; i++) {
-    if (uniqueID === idArr[i]) generateID();
-    else {
-      idArr.push(uniqueID);
-      return uniqueID;
+  if (!idArr) {
+    for (let i = 0; i < idArr.length; i++) {
+      if (uniqueID === idArr[i]) generateID();
+      else {
+        idArr.push(uniqueID);
+        return uniqueID;
+      }
     }
+  } else {
+    idArr.push(uniqueID);
+    return uniqueID;
   }
 };
 
@@ -22,6 +27,7 @@ function Employee(name, department, level, imageURL, salary) {
   this.imageURL = imageURL;
   this.salary = salary;
   employeesData.push(this);
+  console.log(idArr, employeesData);
 }
 
 Employee.prototype.employeeSalary = function () {
@@ -41,25 +47,31 @@ Employee.prototype.render = function () {
   cardsSection.appendChild(cardDiv);
   cardDiv.classList.add("card-div");
   //----------------------
+  let imgDiv = document.createElement("div");
+  let dataDiv = document.createElement("div");
+  dataDiv.classList.add("data-div");
+  cardDiv.appendChild(imgDiv);
+  cardDiv.appendChild(dataDiv);
   let empImg = document.createElement("img"); //create image
   empImg.src = this.imageURL;
-  cardDiv.appendChild(empImg);
+  empImg.classList.add("card-img");
+  imgDiv.appendChild(empImg);
   //---------------------------
-  let empName = document.createElement("h3"); // create name
+  let empName = document.createElement("p"); // create name
   empName.textContent = this.fullName;
-  cardDiv.appendChild(empName);
+  dataDiv.appendChild(empName);
   //--------------------------
   let empDepartment = document.createElement("p"); // create department
   empDepartment.textContent = this.department;
-  cardDiv.appendChild(empDepartment);
+  dataDiv.appendChild(empDepartment);
   //--------------------------
   let empLevel = document.createElement("p"); // create level
   empLevel.textContent = this.level;
-  cardDiv.appendChild(empLevel);
+  dataDiv.appendChild(empLevel);
   //--------------------------
   let empID = document.createElement("p"); // create level
   empID.textContent = this.employeeID;
-  cardDiv.appendChild(empID);
+  dataDiv.appendChild(empID);
 };
 const doImportantStuff = function () {
   employeesData[employeesData.length - 1].employeeSalary();
