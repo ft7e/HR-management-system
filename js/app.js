@@ -24,87 +24,53 @@ Employee.prototype.employeeSalary = function () {
   }
   this.salary = basicSalary - basicSalary * 0.075;
 };
+
 Employee.prototype.render = function () {
-  let cardDiv = document.createElement("div");
+  let cardDiv = document.createElement("div"); // create a div
   cardsSection.appendChild(cardDiv);
   cardDiv.classList.add("card-div");
   //----------------------
-  let name = document.createElement("h3");
-  name.textContent = this.fullName;
-  cardDiv.appendChild(name);
+  let empImg = document.createElement("img"); //create image
+  empImg.src = this.imageURL;
+  cardDiv.appendChild(empImg);
+  //---------------------------
+  let empName = document.createElement("h3"); // create name
+  empName.textContent = this.fullName;
+  cardDiv.appendChild(empName);
+  //--------------------------
+  let empDepartment = document.createElement("p"); // create department
+  empDepartment.textContent = this.department;
+  cardDiv.appendChild(empDepartment);
+  //--------------------------
+  let empLevel = document.createElement("p"); // create level
+  empLevel.textContent = this.level;
+  cardDiv.appendChild(empLevel);
+  //--------------------------
+};
+const doImportantStuff = function () {
+  for (let i = 0; i < employeesData.length; i++) {
+    employeesData[i].employeeSalary();
+  }
+  for (let i = 0; i < employeesData.length; i++) {
+    employeesData[i].render();
+  }
 };
 function addCard(event) {
   event.preventDefault();
   let formFullName = document.querySelector("#fname").value;
   let formImgUrl = document.querySelector("#img-url").value;
   let formDepSelector = document.querySelector("#department").value;
-  console.log(formDepSelector);
+  let formLevelSelector = document.querySelector("#level").value;
+
+  new Employee(
+    1,
+    formFullName,
+    formDepSelector,
+    formLevelSelector,
+    (formImgUrl = "images/squirdWard.jpg"),
+    0
+  );
+  doImportantStuff();
 }
 
 mainForm.addEventListener("submit", addCard);
-
-let employee1000 = new Employee(
-  1000,
-  "Ghazi Samer",
-  "Administration",
-  "senior",
-  "images/undefined.jpg",
-  0
-);
-let employee1001 = new Employee(
-  1001,
-  "Lana Ali",
-  "Finance",
-  "senior",
-  "images/undefined.jpg",
-  0
-);
-let employee1002 = new Employee(
-  1002,
-  "Tamara Ayoub",
-  "Marketing",
-  "senior",
-  "images/undefined.jpg",
-  0
-);
-let employee1003 = new Employee(
-  1003,
-  "Safi Walid",
-  "Administration",
-  "mid-senior",
-  "images/undefined.jpg",
-  0
-);
-let employee1004 = new Employee(
-  1004,
-  "Omar Zaid",
-  "Development",
-  "senior",
-  "images/undefined.jpg",
-  0
-);
-let employee1005 = new Employee(
-  1005,
-  "Rana Saleh",
-  "Development",
-  "junior",
-  "images/undefined.jpg",
-  0
-);
-let employee1006 = new Employee(
-  1006,
-  "Hadi Ahmad",
-  "Finance",
-  "mid-senior",
-  "images/undefined.jpg",
-  0
-);
-
-for (let i = 0; i < employeesData.length; i++) {
-  employeesData[i].employeeSalary();
-}
-for (let i = 0; i < employeesData.length; i++) {
-  employeesData[i].render();
-}
-
-// DOM section
