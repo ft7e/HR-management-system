@@ -27,19 +27,18 @@ function Employee(name, department, level, imageURL, salary) {
   this.imageURL = imageURL;
   this.salary = salary;
   employeesData.push(this);
-  console.log(idArr, employeesData);
 }
 
 Employee.prototype.employeeSalary = function () {
   let basicSalary;
   if (this.level.toLocaleLowerCase() === "senior") {
-    basicSalary = Math.floor(Math.random() * (2000 - 1501)) + 1500;
+    basicSalary = Math.random() * (2000 - 1501) + 1500;
   } else if (this.level.toLocaleLowerCase() === "mid-senior") {
-    basicSalary = Math.floor(Math.random() * (1500 - 1001)) + 1000;
+    basicSalary = Math.random() * (1500 - 1001) + 1000;
   } else if (this.level.toLocaleLowerCase() === "junior") {
-    basicSalary = Math.floor(Math.random() * (1000 - 501)) + 500;
+    basicSalary = Math.random() * (1000 - 501) + 500;
   }
-  this.salary = basicSalary - basicSalary * 0.075;
+  this.salary = Math.floor(basicSalary - basicSalary * 0.075);
 };
 
 Employee.prototype.render = function () {
@@ -50,6 +49,7 @@ Employee.prototype.render = function () {
   let imgDiv = document.createElement("div");
   let dataDiv = document.createElement("div");
   dataDiv.classList.add("data-div");
+  imgDiv.classList.add("img-Div");
   cardDiv.appendChild(imgDiv);
   cardDiv.appendChild(dataDiv);
   let empImg = document.createElement("img"); //create image
@@ -58,20 +58,24 @@ Employee.prototype.render = function () {
   imgDiv.appendChild(empImg);
   //---------------------------
   let empName = document.createElement("p"); // create name
-  empName.textContent = this.fullName;
+  empName.textContent = `Name :${this.fullName}`;
   dataDiv.appendChild(empName);
   //--------------------------
   let empDepartment = document.createElement("p"); // create department
-  empDepartment.textContent = this.department;
+  empDepartment.textContent = `Department :${this.department}`;
   dataDiv.appendChild(empDepartment);
   //--------------------------
   let empLevel = document.createElement("p"); // create level
-  empLevel.textContent = this.level;
+  empLevel.textContent = `Level :${this.level}`;
   dataDiv.appendChild(empLevel);
   //--------------------------
   let empID = document.createElement("p"); // create level
-  empID.textContent = this.employeeID;
+  empID.textContent = `ID :${this.employeeID}`;
   dataDiv.appendChild(empID);
+  //---------------------------
+  let empSalary = document.createElement("p");
+  empSalary.textContent = `Salary :${this.salary}`;
+  dataDiv.appendChild(empSalary);
 };
 const doImportantStuff = function () {
   employeesData[employeesData.length - 1].employeeSalary();
