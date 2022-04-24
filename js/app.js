@@ -4,7 +4,7 @@ let cardsSection = document.querySelector("#cards-section");
 let mainForm = document.querySelector("#main-form");
 const idArr = [];
 const generateID = function () {
-  let uniqueID = Math.floor(Math.random() * 10000);
+  let uniqueID = 1000 + Math.floor(Math.random() * 9000);
   if (!idArr) {
     for (let i = 0; i < idArr.length; i++) {
       if (uniqueID === idArr[i]) generateID();
