@@ -1,8 +1,10 @@
 "use strict";
-const employeesData = [];
+let employeesData = [];
 let cardsSection = document.querySelector("#cards-section");
 let mainForm = document.querySelector("#main-form");
 const idArr = [];
+let flag = 0;
+
 const generateID = function () {
   let uniqueID = 1000 + Math.floor(Math.random() * 9000);
   if (!idArr) {
@@ -77,11 +79,39 @@ Employee.prototype.render = function () {
   empSalary.textContent = `Salary :${this.salary}`;
   dataDiv.appendChild(empSalary);
 };
-const doImportantStuff = function () {
-  employeesData[employeesData.length - 1].employeeSalary();
 
-  employeesData[employeesData.length - 1].render();
+const saveData = function () {
+  let saveJsonData = JSON.stringify(employeesData);
+  localStorage.setItem("card", saveJsonData);
 };
+const getData = function () {
+  let getJsonData = localStorage.getItem("card");
+  let dataArr = JSON.parse(getJsonData);
+
+  employeesData = [];
+  for (let i = 0; i < dataArr.length; i++) {
+    new Employee(
+      dataArr[i].fullName,
+      dataArr[i].department,
+      dataArr[i].level,
+      dataArr[i].imageURL,
+      dataArr[i].salary
+    );
+  }
+};
+const doImportantStuff = function () {
+  if (!flag) {
+    for (let i = 0; i < employeesData.length; i++) {
+      employeesData[i].employeeSalary();
+      employeesData[i].render();
+      flag++;
+    }
+  } else {
+    employeesData[employeesData.length - 1].employeeSalary();
+    employeesData[employeesData.length - 1].render();
+  }
+};
+
 function addCard(event) {
   event.preventDefault();
   let formFullName = document.querySelector("#fname").value;
@@ -89,9 +119,14 @@ function addCard(event) {
   !formImgUrl ? (formImgUrl = "images/squidWard.jpg") : "";
   let formDepSelector = document.querySelector("#department").value;
   let formLevelSelector = document.querySelector("#level").value;
-
   new Employee(formFullName, formDepSelector, formLevelSelector, formImgUrl, 0);
+  saveData();
+  getData();
   doImportantStuff();
 }
 
 mainForm.addEventListener("submit", addCard);
+getData();
+doImportantStuff();
+
+//localStorage.setItem()
