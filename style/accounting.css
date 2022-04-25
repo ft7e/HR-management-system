@@ -1,0 +1,23 @@
+* {
+  font-family: "Akshar", sans-serif;
+  font-family: "Open Sans", sans-serif;
+}
+html {
+  font-size: 200%;
+  background-color: #eeeeee;
+}
+.nav-1 {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-bottom: 2rem;
+}
+.nav-links {
+  font-size: 0.7rem;
+}
+#main-table {
+}
+main {
+  display: flex;
+  justify-content: center;
+}
